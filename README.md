@@ -11,7 +11,7 @@
 ## Content
 > A function to create content on demand using the underlying data. It's a mapper function which maps Data to some View.
 
-##Public API is consistent same as ForEach of SwiftUI
+## Public API is consistent same as ForEach of SwiftUI
 ```swift
 /// Creates an instance that uniquely identifies and creates views across
 /// updates based on the identity of the underlying data.
@@ -26,38 +26,39 @@
 ///     create views dynamically.
 ///   - content: The view builder that creates views dynamically.
 
-public init(_ data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content) {
-	self.data = data
-	self.content = content
-}
+public init(_ data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content)
 ```
 
 
 ```swift
-	struct App: Identifiable {
-		var name: String
-		var id: String { return name }
+struct App: Identifiable {
+	var name: String
+	var id: String { return name }
+}
+
+let apps: [App] = [
+	"youtube", "podcast", "twitter",
+	"facebook", "instagram",
+	"free form", "github desktop", "source tree"
+].map(App.init(name: ))
+				
+//you can wrap this CollectionStack into ScrollView as well if you want scrolling				
+CollectionStack(apps) { app in
+	Button {
+		print("Selected tag := \(app.name)")
+	} label: {
+		Text(app.name)
+			.font(.system(.callout, design: .rounded, weight: .regular))
 	}
-	
-	let apps: [App] = [
-		"youtube", "podcast", "twitter",
-		"facebook", "instagram",
-		"free form", "github desktop", "source tree"
-	].map(App.init(name: ))
-					
-	//you can wrap this CollectionStack into ScrollView as well if you want scrolling				
-	CollectionStack(apps) { app in
-		Button {
-			print("Selected tag := \(app.name)")
-		} label: {
-			Text(app.name)
-				.font(.system(.callout, design: .rounded, weight: .regular))
-		}
-		.buttonStyle(.bordered)
-		.padding(.trailing, 8)
-		.padding(.bottom, 8)
-	}
+	.buttonStyle(.bordered)
+	.padding(.trailing, 8)
+	.padding(.bottom, 8)
+}
 ```
+
+## Output of above sample code
+[![Example output](https://github.com/hitendradeveloper/CollectionStack-SwiftUI/raw/main/info-assets/CollectionStack-output.png)](https://github.com/hitendradeveloper/CollectionStack-SwiftUI/raw/main/info-assets/CollectionStack-output.png)
+
 
 ## Requirements
 
