@@ -2,33 +2,7 @@
 
 **CollectionStack is designed to solve limitation of HStack and VStack in SwiftU, it grows horizontally first, then vertically if next element could not fit horizontally.** 
 
-## CollectionStack
-> is generic SwiftUI View over data and content
-
-## Data
-> The collection of underlying identified data that CollectionStack uses to create views dynamically.
-
-## Content
-> A function to create content on demand using the underlying data. It's a mapper function which maps Data to some View.
-
-## Public API is consistent same as ForEach of SwiftUI
-```swift
-/// Creates an instance that uniquely identifies and creates views across
-/// updates based on the identity of the underlying data.
-///
-/// It's important that the `id` of a data element doesn't change unless you
-/// replace the data element with a new data element that has a new
-/// identity. If the `id` of a data element changes, the content view
-/// generated from that data element loses any current state and animations.
-///
-/// - Parameters:
-///   - data: The identified data that the ``CollectionStack`` instance uses to
-///     create views dynamically.
-///   - content: The view builder that creates views dynamically.
-
-public init(_ data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content)
-```
-
+## How to use in code?
 
 ```swift
 struct App: Identifiable {
@@ -59,6 +33,33 @@ CollectionStack(apps) { app in
 ## Output of above sample code
 [![Example output](https://github.com/hitendradeveloper/CollectionStack-SwiftUI/raw/main/info-assets/CollectionStack-output.png)](https://github.com/hitendradeveloper/CollectionStack-SwiftUI/raw/main/info-assets/CollectionStack-output.png)
 
+
+## CollectionStack
+> is generic SwiftUI View over data and content
+
+## Data
+> The collection of underlying identified data that CollectionStack uses to create views dynamically.
+
+## Content
+> A function to create content on demand using the underlying data. It's a mapper function which maps Data to some View.
+
+## Public API is consistent same as ForEach of SwiftUI
+```swift
+/// Creates an instance that uniquely identifies and creates views across
+/// updates based on the identity of the underlying data.
+///
+/// It's important that the `id` of a data element doesn't change unless you
+/// replace the data element with a new data element that has a new
+/// identity. If the `id` of a data element changes, the content view
+/// generated from that data element loses any current state and animations.
+///
+/// - Parameters:
+///   - data: The identified data that the ``CollectionStack`` instance uses to
+///     create views dynamically.
+///   - content: The view builder that creates views dynamically.
+
+public init(_ data: Data, @ViewBuilder content: @escaping (Data.Element) -> Content)
+```
 
 ## Requirements
 
